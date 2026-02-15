@@ -2,15 +2,15 @@ import "dotenv/config"
 import pino from "pino"
 
 const isDev = process.env.NODE_ENV === "development"
-const loggerLevel = process.env.loggerLevel
+const loggerLevel = process.env.LOGGER_LEVEL
+console.log(loggerLevel)
 
 const logger = pino(
   isDev
     ? {
-        // DEV SETTINGS
+        level: loggerLevel,
         transport: {
           target: "pino-pretty",
-          level: loggerLevel,
           options: {
             colorize: true,
             translateTime: "yyyy-mm-dd HH:MM:ss",
@@ -18,8 +18,7 @@ const logger = pino(
           }
         }
       }
-    : // PROD SETTINGS
-      {
+    : {
         level: loggerLevel,
         timestamp: pino.stdTimeFunctions.isoTime
       }
