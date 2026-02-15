@@ -1,6 +1,6 @@
 export const envSchema = {
   type: "object",
-  required: ["NODE_ENV", "FRONTEND_URL", "FRONTEND_URL_LAN", "LOGGER_LEVEL", "PORT", "GOOGLE_MAPS_API_KEY"],
+  required: ["NODE_ENV", "FRONTEND_URL", "LOGGER_LEVEL", "PORT", "GOOGLE_MAPS_API_KEY"],
   properties: {
     NODE_ENV: { type: "string", enum: ["development", "production", "test"] },
     FRONTEND_URL: { type: "string", format: "uri" },
