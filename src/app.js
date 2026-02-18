@@ -33,7 +33,7 @@ await fastify.register(fastifyRateLimit, {
 
 await fastify.register(helmet, { global: true })
 
-await fastify.register(searchRoutes, { prefix: "/api" })
+await fastify.register(searchRoutes)
 
 // START SERVER
 const port = process.env.PORT ?? 3000
