@@ -36,7 +36,7 @@ const getSearchOptions = async () => {
   logger.info("Successfully retrieved search options")
 
   // Map the options to only include id, label, category
-  const searchOptions = searchConstants.SEARCH_OPTIONS.map(({ id, label, category }) => ({ id, label })).sort((a, b) => {
+  const searchOptions = searchConstants.SEARCH_OPTIONS.map(({ id, label }) => ({ id, label })).sort((a, b) => {
     if (a.label < b.label) return -1
     if (a.label > b.label) return 1
     return 0
