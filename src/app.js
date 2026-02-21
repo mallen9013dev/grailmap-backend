@@ -14,8 +14,12 @@ const fastify = Fastify({
 })
 
 // REGISTER PLUGINS
+await fastify.register(fastifyEnv, {
+  schema: envSchema
+})
+
 await fastify.register(cors, {
-  origin: [process.env.FRONTEND_URL, process.env.FRONTEND_URL_LAN].filter(Boolean)
+  origin: [fastify.config.FRONTEND_URL, fastify.config.FRONTEND_URL_LAN].filter(Boolean)
 })
 
 await fastify.register(fastifyRateLimit, {
@@ -28,7 +32,7 @@ await fastify.register(helmet, { global: true })
 await fastify.register(searchRoutes)
 
 // START SERVER
-const port = process.env.PORT ?? 3000
+const port = Number.parseInt(fastify.config.PORT ?? "3000", 10)
 fastify.listen({ port, host: "0.0.0.0" }, (err) => {
   if (err) {
     fastify.log.error(err)
