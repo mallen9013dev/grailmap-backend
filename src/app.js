@@ -18,12 +18,9 @@ await fastify.register(cors, {
   origin: [process.env.FRONTEND_URL, process.env.FRONTEND_URL_LAN].filter(Boolean)
 })
 
-const rateLimitMax = Number.parseInt(process.env.RATE_LIMIT_MAX ?? "", 10) || 10
-const rateLimitWindow = process.env.RATE_LIMIT_WINDOW ?? "1 minute"
 await fastify.register(fastifyRateLimit, {
-  max: rateLimitMax,
-  timeWindow: rateLimitWindow,
-  keyGenerator: (request) => `${request.ip}:${request.routeOptions?.url ?? "unknown"}`
+  max: 300,
+  timeWindow: "5 minutes"
 })
 
 await fastify.register(helmet, { global: true })

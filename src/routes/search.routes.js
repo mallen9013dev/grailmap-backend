@@ -24,7 +24,13 @@ const searchRoutes = async (fastify) => {
   fastify.post(
     "/search",
     {
-      schema: searchForLocationsSchema
+      schema: searchForLocationsSchema,
+      config: {
+        rateLimit: {
+          max: 10,
+          timeWindow: "1 minute"
+        }
+      }
     },
     async (request, reply) => {
       try {
